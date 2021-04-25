@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2016-present, 贵州纳雍穿青人李裕江<1032694760@qq.com>, All Right Reserved.
+ *
+ */
+
+apply from: "${rootDir}/gradle/app.gradle"
+
+dependencies {
+    implementation project(":library")
+    implementation androidxLibrary.fragment
+    debugRuntimeOnly library.logger
+    implementation "com.github.gzu-liyujiang:Logger:1.2.2"
+}
+
+android {
+
+    defaultConfig {
+        //应用的实际包名
+        applicationId "com.github.gzuliyujiang.demo"
+    }
+
+}
