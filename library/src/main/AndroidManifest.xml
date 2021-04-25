@@ -1,2 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.github.gzuliyujiang.library" />
+<!--
+  ~ Copyright (c) 2016-present, 贵州纳雍穿青人李裕江<1032694760@qq.com>, All Right Reserved.
+  ~
+  -->
+
+<manifest package="com.github.gzuliyujiang.progressbar" />

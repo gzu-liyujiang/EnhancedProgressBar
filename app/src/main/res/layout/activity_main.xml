@@ -1,12 +1,209 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) 2019-2021 gzu-liyujiang <1032694760@qq.com>
+  ~
+  ~ The software is licensed under the Mulan PSL v1.
+  ~ You can use this software according to the terms and conditions of the Mulan PSL v1.
+  ~ You may obtain a copy of Mulan PSL v1 at:
+  ~     http://license.coscl.org.cn/MulanPSL
+  ~ THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+  ~ PURPOSE.
+  ~ See the Mulan PSL v1 for more details.
+  ~
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Hello World!" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="长方形：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="none"
+            app:lyj_reached_color="#00FBD0"
+            app:lyj_reached_height="10dp"
+            app:lyj_text_align="top"
+            app:lyj_text_bold="true"
+            app:lyj_text_color="#00FBD0"
+            app:lyj_text_offset="4dp"
+            app:lyj_text_size="12sp"
+            app:lyj_text_visible="true"
+            app:lyj_unreached_color="#E5E5E5"
+            app:lyj_unreached_height="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="平行四边形：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="parallelogram"
+            app:lyj_reached_color="#00FBD0"
+            app:lyj_reached_height="10dp"
+            app:lyj_text_align="top"
+            app:lyj_text_bold="true"
+            app:lyj_text_color="#00FBD0"
+            app:lyj_text_offset="4dp"
+            app:lyj_text_size="12sp"
+            app:lyj_text_visible="true"
+            app:lyj_unreached_color="#E5E5E5"
+            app:lyj_unreached_height="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="椭圆角矩形：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="ellipse"
+            app:lyj_reached_color="#00FBD0"
+            app:lyj_reached_height="10dp"
+            app:lyj_text_align="top"
+            app:lyj_text_bold="true"
+            app:lyj_text_color="#00FBD0"
+            app:lyj_text_offset="4dp"
+            app:lyj_text_size="12sp"
+            app:lyj_text_visible="true"
+            app:lyj_unreached_color="#E5E5E5"
+            app:lyj_unreached_height="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="进度文字居中：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="ellipse"
+            app:lyj_reached_color="#00FBD0"
+            app:lyj_reached_height="10dp"
+            app:lyj_text_align="middle"
+            app:lyj_text_bold="true"
+            app:lyj_text_color="#00FBD0"
+            app:lyj_text_offset="5dp"
+            app:lyj_text_size="12sp"
+            app:lyj_text_visible="true"
+            app:lyj_unreached_color="#E5E5E5"
+            app:lyj_unreached_height="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="进度文字隐藏：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="18dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="ellipse"
+            app:lyj_reached_color="#00FBD0"
+            app:lyj_reached_height="10dp"
+            app:lyj_text_visible="false"
+            app:lyj_unreached_color="#E5E5E5"
+            app:lyj_unreached_height="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="伪按钮：" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="ellipse"
+            app:lyj_reached_color="#00BB00"
+            app:lyj_reached_height="43dp"
+            app:lyj_text_visible="false"
+            app:lyj_unreached_color="#00FF00"
+            app:lyj_unreached_height="43dp" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="parallelogram"
+            app:lyj_reached_color="#00BB00"
+            app:lyj_reached_height="43dp"
+            app:lyj_text_visible="false"
+            app:lyj_unreached_color="#00FF00"
+            app:lyj_unreached_height="43dp" />
+
+        <com.github.gzuliyujiang.progressbar.EnhancedProgressBar
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="50"
+            android:visibility="visible"
+            app:lyj_cut_corner="none"
+            app:lyj_reached_color="#00BB00"
+            app:lyj_reached_height="43dp"
+            app:lyj_text_visible="false"
+            app:lyj_unreached_color="#00FF00"
+            app:lyj_unreached_height="43dp" />
+
+    </LinearLayout>
+
+</ScrollView>
