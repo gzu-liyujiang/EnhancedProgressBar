@@ -17,8 +17,7 @@ dependencies {
     implementation project(":library")
     implementation androidxLibrary.appcompat
     implementation androidxLibrary.multidex
-    debugRuntimeOnly library.logger
-    implementation "com.github.gzu-liyujiang:Logger:1.2.2"
+    implementation library.material
 }
 
 android {
