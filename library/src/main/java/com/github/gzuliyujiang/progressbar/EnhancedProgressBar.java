@@ -19,7 +19,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -80,6 +79,7 @@ public class EnhancedProgressBar extends ProgressBar {
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.EnhancedProgressBar);
             mProgress = a.getInt(R.styleable.EnhancedProgressBar_android_progress, 0);
+            mProgress = Math.min(mProgress, getMax());
             mTextColor = a.getColor(R.styleable.EnhancedProgressBar_lyj_text_color, DEFAULT_TEXT_COLOR);
             mTextSize = (int) a.getDimension(R.styleable.EnhancedProgressBar_lyj_text_size, mTextSize);
             mReachedBarColor = a.getColor(R.styleable.EnhancedProgressBar_lyj_reached_color, mTextColor);
@@ -99,6 +99,7 @@ public class EnhancedProgressBar extends ProgressBar {
         }
         mBarHeight = Math.max(mReachedBarHeight, mUnReachedBarHeight);
         mPaint.setAntiAlias(true);
+        mPaint.setTypeface(Typeface.MONOSPACE);
         mPaint.setTextSize(mTextSize);
         mPaint.setColor(mTextColor);
     }
@@ -145,13 +146,13 @@ public class EnhancedProgressBar extends ProgressBar {
 
     @Override
     public synchronized void setProgress(int progress) {
-        mProgress = progress;
+        mProgress = Math.min(progress, getMax());
         invalidate();
     }
 
     @Override
     public void setProgress(int progress, boolean animate) {
-        mProgress = progress;
+        mProgress = Math.min(progress, getMax());
         invalidate();
     }
 
@@ -161,17 +162,16 @@ public class EnhancedProgressBar extends ProgressBar {
         canvas.translate(getPaddingLeft(), getHeight() / 2f);
         boolean needDrawUnreachedBar = true;
         String text = mProgress + "%";
-        float textWidth;
-        if (mTextVisible) {
-            textWidth = mPaint.measureText(text);
-        } else {
-            textWidth = 0;
-        }
+        float textWidth = mTextVisible ? mPaint.measureText(text) : 0;
         float progressPosX = mRealWidth * (mProgress * 1.0f / getMax());
         float textPosX = progressPosX;
         float reachedEndX;
         if (mTextAlign == TEXT_ALIGN_MIDDLE) {
-            reachedEndX = progressPosX - mTextOffset;
+            if (mProgress >= 95) {
+                reachedEndX = mRealWidth - textWidth - mTextOffset;
+            } else {
+                reachedEndX = progressPosX - mTextOffset;
+            }
         } else {
             reachedEndX = progressPosX;
         }
