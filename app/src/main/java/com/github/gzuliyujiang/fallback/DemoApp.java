@@ -11,9 +11,24 @@
  * See the Mulan PSL v2 for more details.
  */
 
-apply from: "${rootDir}/gradle/library.gradle"
-apply from: "${rootDir}/gradle/publish.gradle"
+package com.github.gzuliyujiang.fallback;
 
-dependencies {
-    // implementation third-party library
+import android.app.Application;
+import android.content.Context;
+
+import androidx.multidex.MultiDex;
+
+/**
+ * @author 贵州山野羡民（1032694760@qq.com）
+ * @see androidx.multidex.MultiDexApplication
+ * @since 2021/5/15 16:01
+ */
+public class DemoApp extends Application {
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
 }

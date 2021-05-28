@@ -11,10 +11,8 @@
   ~ See the Mulan PSL v2 for more details.
   -->
 
-<manifest package="com.example.module">
+<resources>
 
-    <application>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
-    </application>
-
-</manifest>
+</resources>

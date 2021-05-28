@@ -1,6 +1,14 @@
 /*
- * Copyright (c) 2016-present, 贵州纳雍穿青人李裕江<1032694760@qq.com>, All Right Reserved.
+ * Copyright (c) 2016-present 贵州纳雍穿青人李裕江<1032694760@qq.com>
  *
+ * The software is licensed under the Mulan PSL v2.
+ * You can use this software according to the terms and conditions of the Mulan PSL v2.
+ * You may obtain a copy of Mulan PSL v2 at:
+ *     http://license.coscl.org.cn/MulanPSL2
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+ * PURPOSE.
+ * See the Mulan PSL v2 for more details.
  */
 
 ext {
@@ -27,20 +35,20 @@ ext {
             SmartRefreshHeaderMaterial: "com.scwang.smart:refresh-header-material:2.0.3",
             SmartRefreshFooterClassic : "com.scwang.smart:refresh-footer-classics:2.0.3",
             SmartRefreshFooterBall    : "com.scwang.smart:refresh-footer-ball:2.0.3",
-            GifDrawable               : "pl.droidsonroids.gif:android-gif-drawable:1.2.19",
+            GifDrawable               : "pl.droidsonroids.gif:android-gif-drawable:1.2.22",
             aria                      : "com.arialyy.aria:core:3.8.15",
             banner                    : "com.youth.banner:banner:2.1.0",
+            shimmer                   : "com.facebook.shimmer:shimmer:0.5.0",
             shapeofview               : "com.github.florent37:shapeofview:1.4.7",
             lcardview                 : "org.linwg1988:lcardview:1.5.4",
             FlowLayoutManager         : "com.github.1002326270xc:LayoutManager-FlowLayout:v1.8",
+            FlexibleDivider           : "com.yqritc:recyclerview-flexibledivider:1.4.0",
+            wcdb                      : "com.tencent.wcdb:wcdb-android:1.0.8.2",
+            GSYVideoPlayer            : "com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer:v8.1.3-jitpack",
             //noinspection GradleDependency 注意：zxing 3.4.0开始，扫码/二维码生成只支持API>=24，若要支持Android7.0以下则需降级到3.3.3版本
             zxing                     : "com.google.zxing:core:3.3.3",
-            OAID_IMPL                 : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_IMPL:3.0.3",
-            OAID_ASUS                 : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_ASUS:3.0.3",
-            OAID_BUN                  : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_BUN:3.0.3",
-            OAID_SAMSUNG              : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_SAMSUNG:3.0.3",
-            OAID_UODIS                : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_UODIS:3.0.3",
-            OAID_ZUI                  : "com.github.gzu-liyujiang.Android_CN_OAID:OAID_ZUI:3.0.3",
+            zip4j                     : "net.lingala.zip4j:zip4j:2.8.0",
+            OAID                      : "com.github.gzu-liyujiang:Android_CN_OAID:4.1.3",
     ]
 
     // 谷歌支持库 https://developer.android.google.cn/jetpack/androidx/versions/stable-channel?hl=zh-cn
@@ -48,6 +56,7 @@ ext {
             annotation            : "androidx.annotation:annotation:1.1.0",
             core                  : "androidx.core:core:1.5.0-rc01",
             collection            : "androidx.collection:collection:1.1.0",
+            multidex              : "androidx.multidex:multidex:2.0.0",
             fragment              : "androidx.fragment:fragment:1.3.0",
             appcompat             : "androidx.appcompat:appcompat:1.2.0",
             localbroadcastmanager : "androidx.localbroadcastmanager:localbroadcastmanager:1.0.0",

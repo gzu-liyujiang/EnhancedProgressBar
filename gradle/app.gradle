@@ -1,13 +1,18 @@
 /*
- * Copyright (c) 2016-present, 贵州纳雍穿青人李裕江<1032694760@qq.com>, All Right Reserved.
+ * Copyright (c) 2016-present 贵州纳雍穿青人李裕江<1032694760@qq.com>
  *
+ * The software is licensed under the Mulan PSL v2.
+ * You can use this software according to the terms and conditions of the Mulan PSL v2.
+ * You may obtain a copy of Mulan PSL v2 at:
+ *     http://license.coscl.org.cn/MulanPSL2
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+ * PURPOSE.
+ * See the Mulan PSL v2 for more details.
  */
 
 apply plugin: 'com.android.application'
 apply from: "${rootDir}/gradle/common.gradle"
-if (enableResourceProguard) {
-    apply from: "${rootDir}/gradle/resguard.gradle"
-}
 
 android {
     configurations.all {
@@ -54,23 +59,23 @@ android {
     }
 
     defaultConfig {
-        multiDexEnabled false
+        multiDexEnabled enableMultiDex
         signingConfigs {
             //直接使用真实的密钥库文件，避免微信、高德地图等第三方SDK校验失败
             releaseConfig {
                 try {
                     // app/gradle.properties 或  {rootProject}/gradle.properties 或  {USER_HOME}/.gradle/gradle.properties
-                    Map rootProp = project.getProperties()
-                    def signingStoreFile = project.rootProject.file(rootProp.get('signingStoreFile', ''))
+                    Map projectProps = project.getProperties()
+                    def signingStoreFile = project.rootProject.file(projectProps.get('signingStoreFile', ''))
                     if (!signingStoreFile.exists()) {
                         throw new Exception(signingStoreFile + ' can not found')
                     }
                     println("[signing] store file: $signingStoreFile")
-                    def signingStorePassword = rootProp.get('signingStorePassword', '')
+                    def signingStorePassword = projectProps.get('signingStorePassword', '')
                     //println("[signing] store password: $signingStorePassword")
-                    def signingKeyAlias = rootProp.get('signingKeyAlias', '')
+                    def signingKeyAlias = projectProps.get('signingKeyAlias', '')
                     println("[signing] key alias: $signingKeyAlias")
-                    def signingKeyPassword = rootProp.get('signingKeyPassword', '')
+                    def signingKeyPassword = projectProps.get('signingKeyPassword', '')
                     //println("[signing] key password: $signingKeyPassword")
                     storeFile signingStoreFile
                     storePassword signingStorePassword
@@ -97,36 +102,6 @@ android {
                     v2SigningEnabled true
                 }
             }
-        }
-        // 修改 AndroidManifest.xml 里的变量，占位值无法覆盖的坑可参阅 https://www.jianshu.com/p/1d5271c2c366
-        manifestPlaceholders = [
-                MY_CHANNEL: "unknown",
-        ]
-        // 配合 productFlavors 节点按不同维度打包
-        flavorDimensions "MODE"
-    }
-
-    // 打包维度列表，会按维度名字母顺序执行，最终发布的具体渠道包的生成可以借助360加固等工具
-    productFlavors {
-        // 发布模式/正式环境
-        pub {
-            dimension "MODE"
-            // 服务端接口地址
-            buildConfigField "String", "API_BASE_URL", '"https://api.xmofun.com/renren-api"'
-            // 修改 AndroidManifest.xml 里的变量
-            manifestPlaceholders = [
-                    MY_CHANNEL: "publisher-default",
-            ]
-        }
-        // 开发模式/测试环境
-        dev {
-            dimension "MODE"
-            // 服务端接口地址
-            buildConfigField "String", "API_BASE_URL", '"https://test.xmofun.com/renren-api"'
-            // 修改 AndroidManifest.xml 里的变量
-            manifestPlaceholders = [
-                    MY_CHANNEL: "developer-default",
-            ]
         }
     }
 
@@ -161,38 +136,43 @@ android {
 //APK重命名
 println "********** apk outputs **********"
 android.applicationVariants.all { variant ->
+    def versionName = rootProject.ext.getAppVersionName()
+    def versionCode = rootProject.ext.getAppVersionCode()
     variant.outputs.all {
         if (variant.buildType.name == 'debug') {
             //debug版本不重定义输出目录，也不重命名
             return
         }
         if (outputFileName != null && outputFileName.endsWith(".apk")) {
-            def versionName = getGitLatestTag();
-            String fileName = "${outputFile.name.replace('-release.apk', '')}-v${versionName}-${versionCode}.apk"
+            // 命名格式“app_[版本号]_[其他信息].apk”
+            String fileName = "app_${versionName}_${outputFile.name.replace('app-', '').replace('.apk', '')}-${versionCode}.apk"
             //这里只能用相对路径，不然报错
             outputFileName = new File(fileName)
             println "outputFile=$outputFile"
         }
     }
-    //APK构建完成后，备份release版本到指定目录
+    //APK构建完成后，备份release版本及其混淆信息到指定目录
     tasks.all { it ->
         def maybeNeedCopy = false
-        if (it.name.startsWith("resguard")) {
+        if (it.name.startsWith("assemble")) {
             maybeNeedCopy = true
         }
         if (maybeNeedCopy) {
             it.doLast {
                 variant.outputs.each { output ->
-                    File outputFile = output.outputFile;
-                    if (outputFile != null && outputFile.name.endsWith('.apk') && variant.buildType.name == 'release') {
-                        File targetDir = rootProject.file("归档")
+                    def isRelease = variant.buildType.name == 'release'
+                    File outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk') && isRelease) {
+                        File targetDir = rootProject.file("归档/v${versionName}-${versionCode}")
                         targetDir.mkdirs()
                         copy {
                             from outputFile
                             into targetDir
                         }
-                        File copyOutputFile = new File(targetDir, outputFile.name)
-                        println "copyOutputFile=$copyOutputFile"
+                        copy {
+                            from rootProject.file("app/proguard")
+                            into targetDir
+                        }
                     }
                 }
             }

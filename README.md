@@ -1,4 +1,4 @@
-# 安卓项目工程模板
+# EnhancedProgressBar
 
 ![Release APK](https://github.com/gzu-liyujiang/EnhancedProgressBar/workflows/Release%20APK/badge.svg)
 ![Gradle Package](https://github.com/gzu-liyujiang/EnhancedProgressBar/workflows/Gradle%20Package/badge.svg)
@@ -18,7 +18,7 @@ allprojects {
 ```
 ```groovy
 dependencies {
-    implementation 'com.github.gzu-liyujiang:EnhancedProgressBar:版本号'
+    implementation 'com.github.gzu-liyujiang:EnhancedProgressBar:<version>'
 }
 ```
 
@@ -46,27 +46,17 @@ dependencies {
     app:lyj_unreached_height="8dp" />
 ```
 
-## 开发环境
-
-- JDK 1.8
-- Android Studio 4.1.3
-- Android SDK 30
-- Gradle 6.5
-- Plugin@FindViewByME 1.4.3
-- Plugin@GsonFormatPlus 1.5.8
-- 刘海屏模拟器(Pixel 3 XL API 30)
-
-## License
+## 许可协议
 
 ```text
-Copyright (c) 2019-2021 gzu-liyujiang <1032694760@qq.com>
+Copyright (c) 2016-present 贵州纳雍穿青人李裕江<1032694760@qq.com>
 
-The software is licensed under the Mulan PSL v1.
-You can use this software according to the terms and conditions of the Mulan PSL v1.
-You may obtain a copy of Mulan PSL v1 at:
-    http://license.coscl.org.cn/MulanPSL
+The software is licensed under the Mulan PSL v2.
+You can use this software according to the terms and conditions of the Mulan PSL v2.
+You may obtain a copy of Mulan PSL v2 at:
+    http://license.coscl.org.cn/MulanPSL2
 THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
 PURPOSE.
-See the Mulan PSL v1 for more details.
+See the Mulan PSL v2 for more detail
 ```

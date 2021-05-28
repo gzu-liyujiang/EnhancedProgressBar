@@ -10,10 +10,18 @@
  * PURPOSE.
  * See the Mulan PSL v2 for more details.
  */
+package com.github.gzuliyujiang.fallback;
 
-apply from: "${rootDir}/gradle/library.gradle"
-apply from: "${rootDir}/gradle/publish.gradle"
+import android.os.Bundle;
 
-dependencies {
-    // implementation third-party library
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
 }

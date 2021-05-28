@@ -1,24 +1,32 @@
 /*
- * Copyright (c) 2016-present, 贵州纳雍穿青人李裕江<1032694760@qq.com>, All Right Reserved.
+ * Copyright (c) 2016-present 贵州纳雍穿青人李裕江<1032694760@qq.com>
  *
+ * The software is licensed under the Mulan PSL v2.
+ * You can use this software according to the terms and conditions of the Mulan PSL v2.
+ * You may obtain a copy of Mulan PSL v2 at:
+ *     http://license.coscl.org.cn/MulanPSL2
+ * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+ * PURPOSE.
+ * See the Mulan PSL v2 for more details.
  */
 
 android {
 
-    compileSdkVersion rootProject.ext.compileSdkVersion as int
+    compileSdkVersion rootProject.ext.compileSdkVersion as Integer
     buildToolsVersion rootProject.ext.buildToolsVersion
     // 配置资源名前缀提示，避免资源名重复
     //resourcePrefix project.name == 'app' ? '' : project.name.toLowerCase() + '_'
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion as int
-        targetSdkVersion rootProject.ext.targetSdkVersion as int
-        versionCode gitGitCommitNumber() as int
-        versionName getGitLatestTag()
+        minSdkVersion rootProject.ext.minSdkVersion as Integer
+        targetSdkVersion rootProject.ext.targetSdkVersion as Integer
+        versionCode rootProject.ext.getAppVersionCode() as Integer
+        versionName rootProject.ext.getAppVersionName()
         println("versionCode: $versionCode\nversionName: $versionName")
         buildConfigField "String", "BUILD_TIME", '"' + new Date().format("yyyy-MM-dd HH:mm") + '"'
-        buildConfigField "String", "GIT_BRANCH", '"' + getGitBranch() + '"'
-        buildConfigField "String", "GIT_LATEST_COMMIT_HASH", '"' + getGitLatestCommitHashShort() + '"'
+        buildConfigField "String", "GIT_BRANCH", '"' + rootProject.ext.getGitBranch() + '"'
+        buildConfigField "String", "GIT_LATEST_COMMIT_HASH", '"' + rootProject.ext.getGitLatestCommitHashShort() + '"'
     }
 
     sourceSets {
@@ -54,22 +62,22 @@ android {
     packagingOptions {
         doNotStrip '*/mips/*.so'
         doNotStrip '*/mips64/*.so'
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
+        exclude 'DEPENDENCIES'
+        exclude 'LICENSE'
+        exclude 'NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL*'
-        exclude 'META-INF/ASL*'
-        exclude 'META-INF/proguard/*'
+        exclude 'META-INF/proguard/*.pro'
         exclude 'META-INF/*.version'
-        exclude 'androidsupportmultidexversion.txt'
-        exclude 'LICENSE*'
         exclude 'junit/*/*'
+        exclude 'androidsupportmultidexversion.txt'
     }
 
 }
