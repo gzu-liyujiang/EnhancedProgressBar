@@ -75,6 +75,20 @@ public class EnhancedProgressBar extends ProgressBar {
         init(context, attrs);
     }
 
+    public void setBarColor(int mReachedBarColor, int mUnReachedBarColor) {
+        this.mReachedBarColor = mReachedBarColor;
+        this.mUnReachedBarColor = mUnReachedBarColor;
+        invalidate();
+    }
+
+    public void setBarHeight(int mReachedBarHeight, int mUnReachedBarHeight) {
+        this.mBarHeight = Math.max(mReachedBarHeight, mUnReachedBarHeight);
+        this.mReachedBarHeight = mReachedBarHeight;
+        this.mUnReachedBarHeight = mUnReachedBarHeight;
+        requestLayout();
+        invalidate();
+    }
+
     private void init(Context context, AttributeSet attrs) {
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.EnhancedProgressBar);
