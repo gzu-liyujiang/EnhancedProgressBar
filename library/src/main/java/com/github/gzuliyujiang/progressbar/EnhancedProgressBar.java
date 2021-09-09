@@ -244,21 +244,25 @@ public class EnhancedProgressBar extends ProgressBar {
             canvas.drawLine(0, 0, reachedEndX, 0, mPaint);
             return;
         }
-        if (mCutCorner == CUT_CORNER_PARALLELOGRAM && reachedEndX < mBarHeight) {
+        if (mCutCorner == CUT_CORNER_PARALLELOGRAM && reachedEndX < mReachedBarHeight) {
             return;
         }
         mPaint.setStrokeWidth(0);
-        int barGap = mUnReachedBarHeight - mReachedBarHeight;
+        int reachedBarHeight = mReachedBarHeight;
+        if (mCutCorner == CUT_CORNER_ELLIPSE && reachedEndX < mReachedBarHeight) {
+            reachedBarHeight = (int) reachedEndX;
+        }
+        int barGap = mUnReachedBarHeight - reachedBarHeight;
         if (mCutCorner == CUT_CORNER_ELLIPSE) {
             barGap = barGap / 2;
         }
         float top = -1 * mBarHeight / 2f + Math.max(0, barGap);
-        mRectF.set(0, top, reachedEndX, mReachedBarHeight + top);
+        mRectF.set(0, top, reachedEndX, reachedBarHeight + top);
         Path path;
         if (mCutCorner == CUT_CORNER_PARALLELOGRAM) {
-            path = generateParallelogram(mRectF, mReachedBarHeight);
+            path = generateParallelogram(mRectF, reachedBarHeight);
         } else {
-            path = generateEllipse(mRectF, mReachedBarHeight);
+            path = generateEllipse(mRectF, reachedBarHeight);
         }
         canvas.drawPath(path, mPaint);
     }
